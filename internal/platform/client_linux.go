@@ -132,12 +132,13 @@ func run(ctx context.Context, name string, args ...string) error {
 	var cmd *exec.Cmd
 	switch name {
 	case "ip":
-		cmd = exec.CommandContext(ctx, "ip", args...)
+		cmd = exec.CommandContext(ctx, "ip")
 	case "resolvectl":
-		cmd = exec.CommandContext(ctx, "resolvectl", args...)
+		cmd = exec.CommandContext(ctx, "resolvectl")
 	default:
 		return fmt.Errorf("unsupported system command %q", name)
 	}
+	cmd.Args = append(cmd.Args, args...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%s %v: %w: %s", name, args, err, strings.TrimSpace(string(out)))
