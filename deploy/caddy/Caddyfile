@@ -1,0 +1,25 @@
+{$VEILINK_DOMAIN} {
+	tls {
+		protocols tls1.3
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		-Server
+	}
+
+	reverse_proxy 127.0.0.1:8080 {
+		flush_interval -1
+	}
+
+	log {
+		output file /var/log/caddy/veilink-access.log {
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 168h
+		}
+		format json
+	}
+}

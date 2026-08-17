@@ -1,0 +1,20 @@
+# Copy to /etc/veilink/server.yaml, replace the placeholder digest, and set
+# ownership root:veilink with mode 0640.
+listen: 127.0.0.1:8080
+metrics_listen: 127.0.0.1:9090
+tunnel_path: /assets/v1/stream
+network: 10.77.0.0/24
+gateway: 10.77.0.1
+interface: veilink0
+mtu: 1280
+handshake_timeout: 10s
+idle_timeout: 90s
+shutdown_timeout: 15s
+max_clients: 256
+log:
+  level: info
+  format: json
+clients:
+  - name: laptop
+    address: 10.77.0.2
+    token_sha256: "REPLACE_WITH_SHA256_DIGEST_FROM_VEILINK_TOKEN"

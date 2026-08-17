@@ -1,0 +1,15 @@
+/bin/
+/dist/
+/.release-stage/
+/coverage.out
+/coverage
+*.log
+*.pid
+*.exe
+*.test
+.env
+server.yaml
+client.yaml
+secrets/
+deploy/caddy/site/
+!deploy/caddy/site/.gitkeep

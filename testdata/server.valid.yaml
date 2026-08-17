@@ -1,0 +1,16 @@
+listen: 127.0.0.1:18080
+metrics_listen: 127.0.0.1:19090
+tunnel_path: /assets/v1/stream
+network: 10.77.0.0/24
+gateway: 10.77.0.1
+interface: veilink0
+mtu: 1280
+handshake_timeout: 10s
+idle_timeout: 90s
+shutdown_timeout: 15s
+max_clients: 1
+log: {level: info, format: json}
+clients:
+  - name: test-only
+    address: 10.77.0.2
+    token_sha256: "sha256:f3ef914840aa66442e1801ed32057d56d0a358f67839717d3b863d4cfb3d9729"

@@ -1,0 +1,22 @@
+#!/usr/sbin/nft -f
+
+table inet veilink_filter {
+	chain forward {
+		type filter hook forward priority filter; policy accept;
+
+		# Never let clients address one another through the VPN.
+		iifname "veilink0" oifname "veilink0" drop
+		iifname "veilink0" ct state invalid drop
+		iifname "veilink0" accept
+		oifname "veilink0" ct state established,related accept
+		# No unsolicited forwarding from the uplink to a client.
+		oifname "veilink0" drop
+	}
+}
+
+table ip veilink_nat {
+	chain postrouting {
+		type nat hook postrouting priority srcnat; policy accept;
+		ip saddr 10.77.0.0/24 oifname != "veilink0" masquerade
+	}
+}

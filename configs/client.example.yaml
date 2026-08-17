@@ -1,0 +1,16 @@
+# Store as mode 0600. The raw token belongs only on this client.
+server_url: wss://vpn.example.com/assets/v1/stream
+token: "REPLACE_WITH_RAW_VL1_TOKEN"
+name: laptop
+interface: veilink0
+mtu: 1280
+dial_timeout: 15s
+keepalive: 25s
+reconnect: 3s
+dns:
+  - 1.1.1.1
+  - 1.0.0.1
+block_ipv6: true
+log:
+  level: info
+  format: json
