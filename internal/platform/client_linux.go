@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net/netip"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -140,16 +139,4 @@ func run(ctx context.Context, name string, args ...string) error {
 func runIgnoreMissing(ctx context.Context, name string, args ...string) error {
 	_ = run(ctx, name, args...)
 	return nil
-}
-
-func parseDNS(values []string) ([]netip.Addr, error) {
-	result := make([]netip.Addr, 0, len(values))
-	for _, value := range values {
-		ip, err := netip.ParseAddr(value)
-		if err != nil {
-			return nil, err
-		}
-		result = append(result, ip)
-	}
-	return result, nil
 }
