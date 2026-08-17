@@ -129,7 +129,16 @@ func SetupServer(ctx context.Context, o ServerOptions) (Cleanup, error) {
 }
 
 func run(ctx context.Context, name string, args ...string) error {
-	out, err := exec.CommandContext(ctx, name, args...).CombinedOutput()
+	var cmd *exec.Cmd
+	switch name {
+	case "ip":
+		cmd = exec.CommandContext(ctx, "ip", args...)
+	case "resolvectl":
+		cmd = exec.CommandContext(ctx, "resolvectl", args...)
+	default:
+		return fmt.Errorf("unsupported system command %q", name)
+	}
+	out, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%s %v: %w: %s", name, args, err, strings.TrimSpace(string(out)))
 	}
