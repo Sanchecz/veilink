@@ -10,6 +10,15 @@ confidentiality, integrity, and transport compatibility.
 > Veilink is designed for transport replaceability and a low public attack
 > surface, not as a promise of permanent reachability.
 
+## Development status
+
+This repository is a private pre-release workspace prepared for testing and
+further development. The `main` branch is the reviewed release-candidate
+baseline, the `develop` branch is the integration branch for ongoing work, and
+tagged release candidates provide reproducible checkpoints. Do not treat a
+release candidate as a guarantee that a deployment will remain reachable on
+every network; validate it against the target VDS and client environments.
+
 ## Release scope
 
 - Linux amd64/arm64 VDS server.
